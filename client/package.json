@@ -16,7 +16,7 @@
     }
   },
   "lint-staged": {
-    "src/**/*": ["yarn lint --fix, yarn test --findRelatedTests --bail"] 
+    "src/**/*": ["yarn lint --fix", "yarn test --findRelatedTests --bail"]  
   },
   "dependencies": {
     "next": "9.5.3",
