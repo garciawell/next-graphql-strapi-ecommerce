@@ -5,8 +5,9 @@ services:
     environment:
       POSTGRES_DB: strapi
       POSTGRES_USER: strapi
-      POSTGRES_PASSWORD: strapi
+      POSTGRES_PASSWORD: strapi123
     # volumes:
     #   - ./data:/var/lib/postgresql/data
     ports:
         - "5432:5432"
+
