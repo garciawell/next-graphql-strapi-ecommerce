@@ -11,7 +11,7 @@
     "test:watch": "yarn test --watch",
     "storybook": "start-storybook -s ./public -p 6006",
     "build-storybook": "build-storybook -s ./public",
-    "generate": "yarn plop --propfile ./generators/propfile.js"
+    "generate": "yarn plop --plopfile generators/plopfile.js"
   },
   "dependencies": {
     "next": "9.5.3",
