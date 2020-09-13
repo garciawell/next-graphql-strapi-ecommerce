@@ -2,6 +2,8 @@ version: '3'
 services:
   postgres:
     image: postgres
+    container_name: landing-page-api
+    restart: always
     environment:
       POSTGRES_DB: strapi
       POSTGRES_USER: strapi
