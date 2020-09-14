@@ -2,12 +2,12 @@ version: '3'
 services:
   postgres:
     image: postgres
-    container_name: landing-page-api
+    container_name: wongames-api
     restart: always
     environment:
-      POSTGRES_DB: strapi
-      POSTGRES_USER: strapi
-      POSTGRES_PASSWORD: strapi123
+      POSTGRES_DB: wongames
+      POSTGRES_USER: wongames
+      POSTGRES_PASSWORD: wongames123
     # volumes:
     #   - ./data:/var/lib/postgresql/data
     ports:
