@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "description": "This is the description of the plugin.",
   "strapi": {
-    "name": "repositories",
-    "icon": "plug",
+    "name": "Repositories",
+    "icon": "code",
     "description": "Description of repositories plugin."
   },
   "dependencies": {},
