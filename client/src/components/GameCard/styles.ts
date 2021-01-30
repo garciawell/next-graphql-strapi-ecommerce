@@ -11,9 +11,10 @@ export const Wrapper = styled.article`
   `}
 `
 
-export const ImageBox = styled.div`
+export const ImageBox = styled.a`
   height: 14rem;
   width: 100%;
+  text-decoration: none;
   background: #f6f7f8;
   background-image: linear-gradient(
     to right,
@@ -53,8 +54,9 @@ export const Content = styled.div`
   `}
 `
 
-export const Info = styled.div`
+export const Info = styled.a`
   max-width: calc(100% - 2.5rem);
+  text-decoration: none;
 `
 
 export const Title = styled.h3`
