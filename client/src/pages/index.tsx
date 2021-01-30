@@ -1,4 +1,3 @@
-import bannersMock from 'components/BannerSlider/mock'
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 import { QueryHome } from 'graphql/generated/QueryHome'
