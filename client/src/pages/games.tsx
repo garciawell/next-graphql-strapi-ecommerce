@@ -1,7 +1,7 @@
 import GamesTemplate, { GamesTemplateProps } from 'templates/Games'
 import filterItemsMock from 'components/ExploreSidebar/mock'
 import { initializeApollo } from 'utils/apollo'
-import { gql } from '@apollo/client'
+import { QUERY_GAMES } from 'graphql/queries/games'
 
 export default function GamesPage(props: GamesTemplateProps) {
   return <GamesTemplate {...props} />
@@ -11,21 +11,10 @@ export async function getStaticProps() {
   const apollo = initializeApollo()
 
   const { data } = await apollo.query({
-    query: gql`
-      query QueryGames {
-        games {
-          name
-          slug
-          cover {
-            url
-          }
-          developers {
-            name
-          }
-          price
-        }
-      }
-    `
+    query: QUERY_GAMES,
+    variables: {
+      limit: 9
+    }
   })
 
   return {
@@ -34,7 +23,7 @@ export async function getStaticProps() {
       games: data.games.map((game) => ({
         title: game.name,
         developer: game.developers[0].name,
-        img: `http://localhost:1337/${game.cover.url}`,
+        img: `http://localhost:1337${game.cover.url}`,
         price: new Intl.NumberFormat('en', {
           style: 'currency',
           currency: 'USD'
