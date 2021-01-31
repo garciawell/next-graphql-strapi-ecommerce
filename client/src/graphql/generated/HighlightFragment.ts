@@ -3,6 +3,8 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT } from "./globalTypes";
+
 // ====================================================
 // GraphQL fragment: HighlightFragment
 // ====================================================
@@ -25,4 +27,5 @@ export interface HighlightFragment {
   floatImage: HighlightFragment_floatImage | null;
   buttonLabel: string;
   buttonLink: string;
+  alignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT | null;
 }
