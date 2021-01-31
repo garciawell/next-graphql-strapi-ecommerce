@@ -1,9 +1,8 @@
-import gamesMock from 'components/GameCardSlider/mock'
-import highlightMock from 'components/Highlight/mock'
-import { QueryHome } from 'graphql/generated/QueryHome'
+import { QueryHome, QueryHomeVariables } from 'graphql/generated/QueryHome'
 import { QUERY_HOME } from 'graphql/queries/home'
 import Home, { HomeTemplateProps } from 'templates/Home'
 import { initializeApollo } from 'utils/apollo'
+import { bannerMapper, gamesMapper, highlightMapper } from 'utils/mappers'
 
 export default function Index(props: HomeTemplateProps) {
   return <Home {...props} />
@@ -17,42 +16,32 @@ export default function Index(props: HomeTemplateProps) {
 // getInitialProps => gerar via ssr a cada request
 export async function getStaticProps() {
   const apollo = initializeApollo()
+  const TODAY = new Date().toISOString().slice(0, 10)
 
   const {
-    data: { banners, newGames }
-  } = await apollo.query<QueryHome>({
-    query: QUERY_HOME
+    data: { banners, newGames, upcomingGames, freeGames, sections }
+  } = await apollo.query<QueryHome, QueryHomeVariables>({
+    query: QUERY_HOME,
+    variables: {
+      date: TODAY
+    }
   })
 
   return {
     props: {
       revalidate: 60,
-      banners: banners.map((b) => ({
-        img: `http://localhost:1337${b.image?.url}`,
-        title: b.title,
-        subtitle: b.subtitle,
-        buttonLabel: b.button?.label,
-        buttonLink: b.button?.link,
-        ...(b.ribbon && {
-          ribbon: b.ribbon.color,
-          ribbonColor: b.ribbon.color,
-          ribbonSize: b.ribbon.size
-        })
-      })),
-      newGames: newGames.map((game) => ({
-        title: game.name,
-        slug: game.slug,
-        developer: game.developers[0].name,
-        img: `http://localhost:1337${game.cover?.url}`,
-        price: game.price
-      })),
-      mostPopularHighlight: highlightMock,
-      mostPopularGames: gamesMock,
-      upcomingGames: gamesMock,
-      upcomingHighlight: highlightMock,
-      upcomingMoreGames: gamesMock,
-      freeGames: gamesMock,
-      freeHighlight: highlightMock
+      banners: bannerMapper(banners),
+      newGamesTitle: sections?.newGames?.title,
+      newGames: gamesMapper(newGames),
+      mostPopularGamesTitle: sections?.popularGames?.title,
+      mostPopularHighlight: highlightMapper(sections?.popularGames?.highlight),
+      mostPopularGames: gamesMapper(sections!.popularGames!.games),
+      upcomingGamesTitle: sections?.upcomingGames?.title,
+      upcomingGames: gamesMapper(upcomingGames),
+      upcomingHighlight: highlightMapper(sections?.upcomingGames?.highlight),
+      freeGamesTitle: sections?.freeGames?.title,
+      freeGames: gamesMapper(freeGames),
+      freeHighlight: highlightMapper(sections?.freeGames?.highlight)
     }
   }
 }
